@@ -441,6 +441,21 @@ export default function App() {
           </div>
         </main>
       )}
+
+      {/* Developer Footer */}
+      <footer className="w-full text-center py-6 mt-4 opacity-75 hover:opacity-100 transition-opacity">
+        <p className="text-sm font-medium text-gray-400 flex items-center justify-center gap-2">
+          Developed by
+          <a
+            href="https://github.com/2nithin2"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-600 font-bold px-3 py-1 bg-primary-50 rounded-md shadow-sm border border-primary-100 hover:bg-primary-100 hover:text-primary-700 transition-colors flex items-center gap-1.5"
+          >
+            Nithin
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }
