@@ -249,40 +249,42 @@ export default function App() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-        <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col space-y-6">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl font-bold text-gray-800">Login</h2>
-            <p className="text-sm text-gray-500">Please authenticate to continue (use admin/admin)</p>
+      <div className="min-h-screen flex items-center justify-center bg-[#050505] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 to-black p-4 selection:bg-blue-500/30">
+        <div className="max-w-md w-full bg-white/5 backdrop-blur-2xl p-10 rounded-[2rem] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex flex-col space-y-8 animate-in zoom-in-95 duration-700">
+          <div className="text-center space-y-3">
+            <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 drop-shadow-md tracking-tight">Restricted Access</h2>
+            <p className="text-sm text-gray-400 font-medium">Please authenticate to establish connection</p>
           </div>
-          <input 
-            type="text" 
-            placeholder="Username" 
-            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500" 
-            value={username} 
-            onChange={e => setUsername(e.target.value)} 
-          />
-          <input 
-            type="password" 
-            placeholder="Password" 
-            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500" 
-            value={password} 
-            onChange={e => setPassword(e.target.value)} 
-            onKeyDown={e => {
-              if (e.key === 'Enter') {
-                if (username === 'admin' && password === 'admin') setIsAuthenticated(true);
-                else alert('Invalid credentials (use admin / admin)');
-              }
-            }}
-          />
+          <div className="space-y-4">
+            <input 
+              type="text" 
+              placeholder="Username" 
+              className="w-full p-4 bg-black/50 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent text-white placeholder-gray-600 transition-all font-medium" 
+              value={username} 
+              onChange={e => setUsername(e.target.value)} 
+            />
+            <input 
+              type="password" 
+              placeholder="Password" 
+              className="w-full p-4 bg-black/50 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent text-white placeholder-gray-600 transition-all font-medium" 
+              value={password} 
+              onChange={e => setPassword(e.target.value)} 
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  if (username === 'Nithin' && password === 'Spidy@22') setIsAuthenticated(true);
+                  else alert('Invalid credentials');
+                }
+              }}
+            />
+          </div>
           <button 
             onClick={() => { 
-              if (username === 'admin' && password === 'admin') setIsAuthenticated(true); 
-              else alert('Invalid credentials (use admin / admin)'); 
+              if (username === 'Nithin' && password === 'Spidy@22') setIsAuthenticated(true); 
+              else alert('Invalid credentials'); 
             }} 
-            className="w-full py-3 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 transition-colors"
+            className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_35px_rgba(79,70,229,0.5)] font-bold rounded-2xl transition-all duration-300 tracking-wide text-lg"
           >
-            Sign In
+            Terminal Login
           </button>
         </div>
       </div>
@@ -290,172 +292,203 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen p-8 max-w-7xl mx-auto space-y-8">
-      <header className="text-center space-y-2">
-        <h1 className="text-4xl font-extrabold text-primary-700 tracking-tight">Drive Video Watermarker</h1>
-        <p className="text-gray-500">Source your video, set your destination, and process all in one click.</p>
-      </header>
+    <div className="min-h-screen bg-[#050505] text-gray-200 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-[#050505] to-black p-4 sm:p-8 font-sans selection:bg-blue-500/30">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <header className="text-center space-y-4 pt-8 pb-4 animate-in fade-in slide-in-from-top-8 duration-1000">
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+            Drive Video Watermarker
+          </h1>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto font-light tracking-wide">
+            Source your video, select a destination, and render flawlessly in a specialized 3D environment.
+          </p>
+        </header>
 
-      {!loaded && (
-        <div className="flex items-center justify-center p-12 bg-white rounded-xl shadow-sm border border-gray-100">
-          <Loader2 className="w-8 h-8 animate-spin text-primary-500 mr-3" />
-          <span className="text-lg font-medium text-gray-700">{logMessage}</span>
-        </div>
-      )}
-
-      {loaded && (
-        <main className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          <div className="space-y-6">
-            
-            {/* Step 1: Video */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 transition-all hover:shadow-md">
-              <label className="block text-sm font-semibold text-gray-700 mb-4">1. Select Target Video</label>
-              
-              <div className="grid grid-cols-1 gap-3 mb-4">
-                <button
-                  onClick={() => handleDriveImport('video')}
-                  disabled={!googleAuth.isReady || isProcessing || isUploading}
-                  className="w-full py-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 disabled:text-gray-400 font-semibold rounded-xl shadow-sm transition-all flex justify-center items-center cursor-pointer disabled:cursor-not-allowed"
-                >
-                  <DownloadCloud className="w-5 h-5 mr-2" />
-                  {!googleAuth.isReady ? 'Loading Google Services...' : (!googleAuth.accessToken ? 'Login to Import from Drive' : 'Import from Google Drive')}
-                </button>
-                <div className="text-center text-xs text-gray-400 font-medium">OR UPLOAD FROM PC</div>
-              </div>
-
-              <div className="border-2 border-dashed border-primary-200 rounded-xl p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-primary-50 transition-colors relative">
-                <input type="file" accept="video/*" onChange={handleVideoUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed" disabled={isProcessing} />
-                {videoFile ? (
-                  <>
-                    <FileVideo className="w-12 h-12 text-primary-500 mb-2" />
-                    <span className="font-medium text-gray-900 truncate px-4">{videoFile.name}</span>
-                  </>
-                ) : (
-                  <>
-                    <UploadCloud className="w-10 h-10 text-primary-400 mb-2" />
-                    <span className="text-gray-500 font-medium text-sm">Click or pull a video from PC</span>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* Step 2: Watermark */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 transition-all hover:shadow-md">
-              <label className="block text-sm font-semibold text-gray-700 mb-4">2. Select Watermark Image</label>
-              
-              <div className="grid grid-cols-1 gap-3 mb-4">
-                <button
-                  onClick={() => handleDriveImport('image')}
-                  disabled={!googleAuth.isReady || isProcessing || isUploading}
-                  className="w-full py-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 disabled:text-gray-400 font-semibold rounded-xl shadow-sm transition-all flex justify-center items-center cursor-pointer disabled:cursor-not-allowed"
-                >
-                  <DownloadCloud className="w-5 h-5 mr-2" />
-                  {!googleAuth.isReady ? 'Loading Google Services...' : (!googleAuth.accessToken ? 'Login to Import from Drive' : 'Import from Google Drive')}
-                </button>
-                <div className="text-center text-xs text-gray-400 font-medium">OR UPLOAD FROM PC</div>
-              </div>
-
-              <div className="border-2 border-dashed border-primary-200 rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-primary-50 transition-colors relative">
-                <input type="file" accept="image/*" onChange={handleWatermarkUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed" disabled={isProcessing} />
-                {watermarkFile ? (
-                  <>
-                    <CheckCircle className="w-12 h-12 text-green-500 mb-2" />
-                    <span className="font-medium text-gray-900 truncate px-4">{watermarkFile.name}</span>
-                  </>
-                ) : (
-                  <>
-                    <UploadCloud className="w-10 h-10 text-primary-400 mb-2" />
-                    <span className="text-gray-500 font-medium text-sm">Click or pull an image from PC</span>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* Step 3: Destination */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 transition-all hover:shadow-md">
-              <label className="block text-sm font-semibold text-gray-700 mb-4">3. Set Final Destination</label>
-              <div className="grid grid-cols-2 gap-4">
-                <button
-                  onClick={() => { setDestination('local'); setGdriveFolderId(null); setGdriveFolderName(null); }}
-                  disabled={isProcessing || isUploading}
-                  className={`py-4 px-4 flex flex-col items-center justify-center rounded-xl border-2 transition-all ${destination === 'local' ? 'border-primary-500 bg-primary-50 text-primary-700' : 'border-gray-200 hover:border-gray-300 text-gray-600'}`}
-                >
-                  <HardDrive className={`w-8 h-8 mb-2 ${destination === 'local' ? 'text-primary-500' : 'text-gray-400'}`} />
-                  <span className="font-semibold">Local PC</span>
-                </button>
-                
-                <button
-                  onClick={handleFolderPick}
-                  disabled={!googleAuth.isReady || isProcessing || isUploading}
-                  className={`py-4 px-4 flex flex-col items-center justify-center rounded-xl border-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed ${destination === 'gdrive' ? 'border-primary-500 bg-primary-50 text-primary-700' : 'border-gray-200 hover:border-gray-300 text-gray-600'}`}
-                >
-                  <Folder className={`w-8 h-8 mb-2 ${destination === 'gdrive' ? 'text-primary-500' : 'text-gray-400'}`} />
-                  <span className="font-semibold text-center">
-                     {gdriveFolderName ? `Drive: ${gdriveFolderName}` : 'Google Drive Folder'}
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            {/* Step 4: Process Button */}
-            <button
-              onClick={applyWatermark}
-              disabled={!videoFile || !watermarkFile || !destination || isProcessing || isUploading}
-              className="w-full py-5 bg-gray-900 hover:bg-black disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-lg font-bold rounded-xl shadow-md transition-all flex flex-col items-center justify-center relative overflow-hidden group"
-            >
-              {isProcessing || isUploading ? (
-                <>
-                  <div className="flex items-center">
-                    <Loader2 className="w-5 h-5 animate-spin mr-3 relative z-10" />
-                    <span className="relative z-10">Running Sequence: {Math.round(progress)}%</span>
-                  </div>
-                  <div className="absolute inset-0 bg-primary-600 transition-all duration-300" style={{ width: `${progress}%` }}></div>
-                </>
-              ) : (
-                '4. Process & Auto-Export'
-              )}
-            </button>
+        {!loaded && (
+          <div className="flex items-center justify-center p-12 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl">
+            <Loader2 className="w-8 h-8 animate-spin text-blue-500 mr-4" />
+            <span className="text-xl font-medium text-gray-200 tracking-wide">{logMessage}</span>
           </div>
+        )}
 
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center min-h-[500px] sticky top-8">
-            {watermarkedVideo ? (
-              <div className="w-full space-y-4">
-                <h3 className="text-xl font-bold text-gray-800">Final Processing Output</h3>
-                <video src={watermarkedVideo} controls className="w-full rounded-xl bg-black border border-gray-200 shadow-sm" />
-                <div className="mt-4 p-4 bg-green-50 text-green-800 rounded-xl font-medium flex items-center justify-center">
-                  <CheckCircle className="w-5 h-5 mr-2 flex-shrink-0" />
-                  Successfully {destination === 'local' ? 'Downloaded to PC' : `Published to ${gdriveFolderName}`}
+        {loaded && (
+          <main className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            {/* Left Column - Inputs */}
+            <div className="space-y-8 perspective-1000">
+              
+              {/* Step 1: Video */}
+              <div className="group bg-gradient-to-b from-white/[0.05] to-transparent p-6 sm:p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-white/20 transition-all duration-500 backdrop-blur-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/30 text-blue-400 font-bold">1</div>
+                  <label className="text-lg font-semibold text-white tracking-wide">Select Target Video</label>
+                </div>
+                
+                <div className="grid grid-cols-1 gap-4 mb-6">
+                  <button
+                    onClick={() => handleDriveImport('video')}
+                    disabled={!googleAuth.isReady || isProcessing || isUploading}
+                    className="w-full py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white disabled:opacity-50 font-semibold rounded-2xl shadow-lg transition-all flex justify-center items-center cursor-pointer disabled:cursor-not-allowed group-hover:border-white/20"
+                  >
+                    <DownloadCloud className="w-5 h-5 mr-2 text-blue-400" />
+                    {!googleAuth.isReady ? 'Loading Google Services...' : (!googleAuth.accessToken ? 'Login to Import from Drive' : 'Import from Google Drive')}
+                  </button>
+                  <div className="flex items-center justify-center gap-4 my-2 opacity-50"><div className="h-px bg-white/20 w-full"></div><span className="text-xs text-white uppercase tracking-widest font-bold">OR LOCAL VIA PC</span><div className="h-px bg-white/20 w-full"></div></div>
+                </div>
+
+                <div className="border border-dashed border-white/20 rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/5 hover:border-blue-500/50 transition-all duration-300 relative group/dropzone bg-black/20">
+                  <input type="file" accept="video/*" onChange={handleVideoUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed z-10" disabled={isProcessing} />
+                  {videoFile ? (
+                    <div className="flex flex-col items-center transform transition-transform group-hover/dropzone:scale-105">
+                      <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-3 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                        <FileVideo className="w-8 h-8 text-blue-400" />
+                      </div>
+                      <span className="font-semibold text-white tracking-wide truncate max-w-[200px]">{videoFile.name}</span>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center transform transition-transform group-hover/dropzone:scale-105">
+                      <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-3 border border-white/10">
+                        <UploadCloud className="w-8 h-8 text-gray-400 group-hover/dropzone:text-blue-400 transition-colors" />
+                      </div>
+                      <span className="text-gray-400 font-medium tracking-wide">Drag & drop or browse</span>
+                    </div>
+                  )}
                 </div>
               </div>
-            ) : (
-              <div className="text-gray-400 max-w-sm flex flex-col items-center space-y-4">
-                <FileVideo className="w-20 h-20 opacity-20" />
-                <h3 className="text-xl font-bold text-gray-300">No Processed Output Yet</h3>
-                <p className="text-sm">Follow steps 1-4 on the left to set up your workflow. The final preview and logging status will appear here after completion.</p>
-              </div>
-            )}
-            
-            <div className="w-full mt-8 p-4 bg-gray-900 text-green-400 font-mono text-sm text-left rounded-lg h-32 overflow-y-auto">
-              {logMessage}
-            </div>
-          </div>
-        </main>
-      )}
 
-      {/* Developer Footer */}
-      <footer className="w-full text-center py-6 mt-4 opacity-75 hover:opacity-100 transition-opacity">
-        <p className="text-sm font-medium text-gray-400 flex items-center justify-center gap-2">
-          Developed by
-          <a
-            href="https://github.com/2nithin2"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-600 font-bold px-3 py-1 bg-primary-50 rounded-md shadow-sm border border-primary-100 hover:bg-primary-100 hover:text-primary-700 transition-colors flex items-center gap-1.5"
-          >
-            Nithin
-          </a>
-        </p>
-      </footer>
+              {/* Step 2: Watermark */}
+              <div className="group bg-gradient-to-b from-white/[0.05] to-transparent p-6 sm:p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-white/20 transition-all duration-500 backdrop-blur-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/30 text-purple-400 font-bold">2</div>
+                  <label className="text-lg font-semibold text-white tracking-wide">Select Watermark Image</label>
+                </div>
+                
+                <div className="grid grid-cols-1 gap-4 mb-6">
+                  <button
+                    onClick={() => handleDriveImport('image')}
+                    disabled={!googleAuth.isReady || isProcessing || isUploading}
+                    className="w-full py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white disabled:opacity-50 font-semibold rounded-2xl shadow-lg transition-all flex justify-center items-center cursor-pointer disabled:cursor-not-allowed group-hover:border-white/20"
+                  >
+                    <DownloadCloud className="w-5 h-5 mr-2 text-purple-400" />
+                    {!googleAuth.isReady ? 'Loading Google Services...' : (!googleAuth.accessToken ? 'Login to Import from Drive' : 'Import from Google Drive')}
+                  </button>
+                  <div className="flex items-center justify-center gap-4 my-2 opacity-50"><div className="h-px bg-white/20 w-full"></div><span className="text-xs text-white uppercase tracking-widest font-bold">OR LOCAL VIA PC</span><div className="h-px bg-white/20 w-full"></div></div>
+                </div>
+
+                <div className="border border-dashed border-white/20 rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/5 hover:border-purple-500/50 transition-all duration-300 relative group/dropzone bg-black/20">
+                  <input type="file" accept="image/*" onChange={handleWatermarkUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed z-10" disabled={isProcessing} />
+                  {watermarkFile ? (
+                    <div className="flex flex-col items-center transform transition-transform group-hover/dropzone:scale-105">
+                      <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-3 border border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.3)]">
+                        <CheckCircle className="w-8 h-8 text-green-400" />
+                      </div>
+                      <span className="font-semibold text-white tracking-wide truncate max-w-[200px]">{watermarkFile.name}</span>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center transform transition-transform group-hover/dropzone:scale-105">
+                      <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-3 border border-white/10">
+                        <UploadCloud className="w-8 h-8 text-gray-400 group-hover/dropzone:text-purple-400 transition-colors" />
+                      </div>
+                      <span className="text-gray-400 font-medium tracking-wide">Drag & drop or browse</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Step 3: Destination */}
+              <div className="group bg-gradient-to-b from-white/[0.05] to-transparent p-6 sm:p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-white/20 transition-all duration-500 backdrop-blur-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30 text-emerald-400 font-bold">3</div>
+                  <label className="text-lg font-semibold text-white tracking-wide">Set Final Destination</label>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    onClick={() => { setDestination('local'); setGdriveFolderId(null); setGdriveFolderName(null); }}
+                    disabled={isProcessing || isUploading}
+                    className={`py-6 px-4 flex flex-col items-center justify-center rounded-2xl border transition-all duration-300 ${destination === 'local' ? 'border-emerald-500 bg-emerald-500/10 shadow-[0_0_20px_rgba(16,185,129,0.2)] text-emerald-300' : 'border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 text-gray-400'}`}
+                  >
+                    <HardDrive className={`w-8 h-8 mb-3 ${destination === 'local' ? 'text-emerald-400 scale-110' : 'text-gray-500'} transition-transform duration-300`} />
+                    <span className="font-semibold tracking-wide">Local PC</span>
+                  </button>
+                  
+                  <button
+                    onClick={handleFolderPick}
+                    disabled={!googleAuth.isReady || isProcessing || isUploading}
+                    className={`py-6 px-4 flex flex-col items-center justify-center rounded-2xl border transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${destination === 'gdrive' ? 'border-emerald-500 bg-emerald-500/10 shadow-[0_0_20px_rgba(16,185,129,0.2)] text-emerald-300' : 'border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 text-gray-400'}`}
+                  >
+                    <Folder className={`w-8 h-8 mb-3 ${destination === 'gdrive' ? 'text-emerald-400 scale-110' : 'text-gray-500'} transition-transform duration-300`} />
+                    <span className="font-semibold tracking-wide text-center leading-tight">
+                       {gdriveFolderName ? `Drive: ${gdriveFolderName}` : 'Google Drive Folder'}
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Step 4: Process */}
+              <button
+                onClick={applyWatermark}
+                disabled={!videoFile || !watermarkFile || !destination || isProcessing || isUploading}
+                className="w-full py-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:via-indigo-500 hover:to-purple-500 disabled:from-white/10 disabled:to-white/10 disabled:text-gray-500 disabled:shadow-none disabled:cursor-not-allowed text-white text-xl font-extrabold rounded-3xl shadow-[0_0_30px_rgba(79,70,229,0.4)] hover:shadow-[0_0_50px_rgba(79,70,229,0.6)] hover:-translate-y-1 transition-all duration-500 flex flex-col items-center justify-center relative overflow-hidden group tracking-wide border border-white/10"
+              >
+                {isProcessing || isUploading ? (
+                  <>
+                    <div className="flex items-center">
+                      <Loader2 className="w-6 h-6 animate-spin mr-3 relative z-10 text-white drop-shadow-md" />
+                      <span className="relative z-10 drop-shadow-md">Rendering Sequence: {Math.round(progress)}%</span>
+                    </div>
+                    <div className="absolute inset-0 bg-white/20 transition-all duration-300 ease-out" style={{ width: `${progress}%` }}></div>
+                  </>
+                ) : (
+                  <span className="drop-shadow-lg">4. Process & Auto-Export 🚀</span>
+                )}
+              </button>
+            </div>
+
+            {/* Right Column - Output & Logs */}
+            <div className="bg-black/50 backdrop-blur-2xl p-8 rounded-3xl border border-white/10 shadow-[0_8px_40px_rgb(0,0,0,0.8)] flex flex-col items-center justify-center text-center min-h-[600px] sticky top-8 group hover:border-white/20 transition-all duration-500">
+              {watermarkedVideo ? (
+                <div className="w-full space-y-6 animate-in zoom-in-95 duration-500">
+                  <h3 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600 drop-shadow-sm">Final Master Render</h3>
+                  <div className="relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.8)] border border-white/10 p-1 bg-white/5">
+                    <video src={watermarkedVideo} controls className="w-full rounded-xl bg-black" />
+                  </div>
+                  <div className="mt-6 p-5 bg-green-500/10 border border-green-500/20 text-green-400 rounded-2xl font-medium flex items-center justify-center backdrop-blur-md shadow-[0_0_20px_rgba(34,197,94,0.1)]">
+                    <CheckCircle className="w-6 h-6 mr-3 flex-shrink-0" />
+                    Successfully {destination === 'local' ? 'Downloaded to PC' : `Published to ${gdriveFolderName}`}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-gray-500 max-w-sm flex flex-col items-center space-y-6">
+                  <div className="w-32 h-32 rounded-full bg-white/5 flex items-center justify-center border border-white/10 shadow-[inset_0_0_20px_rgba(255,255,255,0.02)] group-hover:shadow-[inset_0_0_40px_rgba(255,255,255,0.05)] transition-all duration-700">
+                    <FileVideo className="w-16 h-16 opacity-30 group-hover:opacity-50 transition-opacity duration-700" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-300 tracking-tight">Awaiting Telemetry</h3>
+                  <p className="text-sm font-medium leading-relaxed opacity-70">Execute steps 1-4 on the terminal sequence. The rendering viewport and log feed will initialize here.</p>
+                </div>
+              )}
+              
+              <div className="w-full mt-10 p-5 bg-black/80 text-blue-400 font-mono text-sm text-left rounded-2xl h-40 overflow-y-auto border border-blue-500/20 shadow-[inset_0_0_15px_rgba(0,0,0,1)] relative">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent opacity-50"></div>
+                {logMessage}
+              </div>
+            </div>
+          </main>
+        )}
+
+        {/* Developer Footer */}
+        <footer className="w-full text-center py-10 mt-12 opacity-50 hover:opacity-100 transition-opacity duration-500">
+          <p className="text-sm font-medium text-gray-500 flex items-center justify-center gap-2">
+            Developed by
+            <a
+              href="https://github.com/2nithin2"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white font-bold px-3 py-1.5 bg-white/5 rounded-lg shadow-[0_0_10px_rgba(255,255,255,0.05)] border border-white/10 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all flex items-center gap-1.5"
+            >
+              Nithin
+            </a>
+          </p>
+        </footer>
+      </div>
     </div>
   );
 }
